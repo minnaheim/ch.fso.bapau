@@ -8,52 +8,300 @@
 
 # Dataset identity (required)
 # These form the first three segments of every key
-country: ""   # ISO 3166-1 alpha-2 code (e.g., "ch", "de", "us")
-provider: ""  # short identifier (e.g., "adecco", "seco")
-dataset: ""   # short identifier (e.g., "sjmi", "gdp")
+country: "ch"   # ISO 3166-1 alpha-2 code (e.g., "ch", "de", "us")
+provider: "fso"  # short identifier (e.g., "adecco", "seco")
+dataset: "bapau"   # short identifier (e.g., "sjmi", "gdp")
 
 # Dataset title (required)
 # At minimum, provide English. Add other languages as needed.
 title:
-  en: ""
-  # de: ""
-  # fr: ""
+  en: "Secondary Sector Production, Orders and Turnover Statistics - quarterly series"
+  de: "Produktions-, Auftrags- und Umsatzstatistik im sekundären Sektor - vierteljährliche Zeitreihen"
+  fr: "Statistique de la production, des commandes et des chiffres d'affaires secteur secondaire - séries trimestrielles"
+  it: "Statistica della produzione, delle ordinazioni e delle cifre d'affari del settore secondario - serie trimestrale"
 
 # Data source name (required)
 source_name:
-  en: ""
-  # de: ""
+  en: "FSO"
+  de: "BFS"
+  fr: "OFS"
+  it: "UST"
 
 # URL to original data source (required)
-source_url: "https://"
+source_url: "https://www.fso.admin.ch"
 
 # Data frequency (required)
 # D = daily, W = weekly, M = monthly, Q = quarterly, Y = yearly, I = irregular
-dataset_frequency: "M"
+dataset_frequency: "Q"
 
 # Units of measurement
 # Use "all" if uniform across variables, or specify per variable key
 units:
   all:
-    en: ""
+    en: "Indices (2010=100), percent"
+    de: "Index 2010=100, Prozent"
+    fr: "Indice (2010=100), pourcent"
+    it: "Indici (2010=100), percentuale"
 
 # Aggregation method for temporal aggregation
 # Valid values: mean, sum, last, first
 aggregate:
-  all: "mean"
+  all: "sum"
 
 # Dimension order (left to right in the key, after country.provider.dataset)
-dim_order: []
+dim_order:
+  - trans
+  - variable
+  - section
+  - adjustment
 
 # Hierarchical structure of dimensions
 # Nest dimensions according to your key structure
-hierarchy: {}
+hierarchy:
+  adjustment:
+    brut: ~
+    sa: ~
+    ca: ~
+  trans:
+    ind: ~
+    var: ~
+  variable:
+    ptot: ~
+    uexp: ~
+    uinl: ~
+    utot: ~
+  section:
+    sekt2:
+      ind:
+        b: ~
+      c:
+        c1012: ~
+        c1315: ~
+        c1618: ~
+        c1920: ~
+        c21: ~
+        c2223: ~
+        c2425: ~
+        c26: ~
+        c27: ~
+        c28: ~
+        c2930: ~
+        c3133: ~
+      d: ~
+      f:
+        f41: ~
+        f42: ~
+        f43: ~
+    migig: ~
+    migcg:
+      migcd: ~
+      migcn: ~
+    migen: ~
 
 # Human-readable labels for dimensions and their values
 # dimnames: labels for dimension names
 # <dimension_name>: labels for values within that dimension
 labels:
-  dimnames: {}
+  dimnames:
+    adjustment:
+      en: "Adjustment"
+      de: "Bereinigung"
+      fr: "Ajustement"
+      it: "Correzione"
+    section:
+      en: "Branch"
+      de: "Branche"
+      fr: "Branche"
+      it: "Attività"
+    trans:
+      en: "Indices...Changes"
+      de: "Indizes...Veränderungsraten"
+      fr: "Indices...Variations"
+      it: "Indici...Variazioni"
+    variable:
+      en: "Variable"
+      de: "Variable"
+      fr: "Variable"
+      it: "Variabile"
+  trans:
+    ind:
+      en: "Indices"
+      de: "Indizes"
+      fr: "Indices"
+      it: "Indici"
+    var:
+      en: "Changes"
+      de: "Veränderungsraten"
+      fr: "Variations"
+      it: "Variazioni"
+  variable:
+    ptot:
+      en: "Production"
+      de: "Produktion"
+      fr: "Production"
+      it: "Produzione"
+    uexp:
+      en: "Foreign turnover"
+      de: "Auslandumsatz"
+      fr: "Chiffre d'affaires à l'extérieur"
+      it: "Cifre d'affari all'estero"
+    uinl:
+      en: "Domestic turnover"
+      de: "Inlandumsatz"
+      fr: "Chiffre d'affaires à l'intérieur"
+      it: "Cifre d'affari sul mercato interno"
+    utot:
+      en: "Total turnover"
+      de: "Gesamtumsatz"
+      fr: "Chiffre d'affaires total"
+      it: "Chifre d'affari totali"
+  section:
+    b:
+      en: "B Mining and quarrying"
+      de: "B Bergbau und Gewinnung von Steinen und Erden"
+      fr: "B Industries extractives"
+      it: "B Attività estrattive"
+    c:
+      en: "C Manufacturing"
+      de: "C Verarbeitendes Gewerbe/Herstellung von Waren"
+      fr: "C Industrie manufacturière"
+      it: "C Attività manifatturiere"
+    c1012:
+      en: "10-12 Manufacture of food and tobacco products"
+      de: "10-12 Herstellung von Nahrungsmitteln und Tabakerzeugnissen"
+      fr: "10-12 Industries alimentaires et du tabac"
+      it: "10-12 Industrie alimentari e del tabacco"
+    c1315:
+      en: "13-15 Manufacture of textiles and apparel"
+      de: "13-15 Herstellung von Textilien und Bekleidung"
+      fr: "13-15 Industries du textile et de l'habillement"
+      it: "13-15 Fabbricazione di tessili e abbigliamento"
+    c1618:
+      en: "16-18 Manufacture of wood and paper products, and printing"
+      de: "16-18 Herstellung von Holzwaren, Papier und Druckerzeugnissen"
+      fr: "16-18 Industries du bois et du papier; imprimerie"
+      it: "16-18 Industria del legno, industria della carta e stampa"
+    c1920:
+      en: "19-20 Manufacture of coke, chemicals and chemical products"
+      de: "19-20 Kokerei, Mineralölverarbeitung und Herstellung von chemischen Erzeugnissen"
+      fr: "19-20 Cokéfaction, raffinage et industrie chimique"
+      it: "19-20 Fabbricazione di coke e industria chimica"
+    c21:
+      en: "21 Manufacture of pharmaceutical products"
+      de: "21 Herstellung von pharmazeutischen Erzeugnissen"
+      fr: "21 Industrie pharmaceutique"
+      it: "21 Industria farmaceutica"
+    c2223:
+      en: "22-23 Manufacture of rubber and plastics products"
+      de: "22-23 Herstellung von Gummi- und Kunststoffwaren"
+      fr: "22-23 Industries du caoutchouc et du plastique"
+      it: "22-23 Industria d'articoli in gomma e in materie plastiche"
+    c2425:
+      en: "24-25 Manufacture of metal products"
+      de: "24-25 Herstellung von Metallerzeugnissen"
+      fr: "24-25 Fabrication de produits métalliques"
+      it: "24-25 Fabbricazione di prodotti in metallo"
+    c26:
+      en: "26 Manufacture of electronic products; watches and clocks"
+      de: "26 Herstellung von Datenverarbeitungsgeräten und Uhren"
+      fr: "26 Fabrication de produits électroniques; horlogerie"
+      it: "26 Fabbricazione di prodotti di elettronica; orologi"
+    c27:
+      en: "27 Manufacture of electrical equipment"
+      de: "27 Herstellung von elektrischen Ausrüstungen"
+      fr: "27 Fabrication d'équipements électriques"
+      it: "27 Fabbricazione di apparecchi elettrici"
+    c28:
+      en: "28 Manufacture of machinery and equipment"
+      de: "28 Maschinenbau"
+      fr: "28 Fabrication de machines"
+      it: "28 Fabbricazione di macchinari"
+    c2930:
+      en: "29-30 Manufacture of transport equipment"
+      de: "29-30 Fahrzeugbau"
+      fr: "29-30 Fabrication de matériels de transport"
+      it: "29-30 Fabbricazione di mezzi di trasporto"
+    c3133:
+      en: "31-33 Other manufacturing, and repair and installation"
+      de: "31-33 Sonstige Herstellung von Waren, Reparatur und Installation"
+      fr: "31-33 Autres industries manufacturières; réparation et installation"
+      it: "31-33 Altre attività manifatturiere, riparazione e installatione"
+    d:
+      en: "D Electricity supply"
+      de: "D Energieversorgung"
+      fr: "D Production et distribution d'énergie"
+      it: "D Fornitura di energia elettrica"
+    f:
+      en: "F Construction"
+      de: "F Baugewerbe"
+      fr: "F Construction"
+      it: "F Costruzioni"
+    f41:
+      en: "41 Building construction"
+      de: "41 Hochbau"
+      fr: "41 Bâtiment"
+      it: "41 Edilizia"
+    f42:
+      en: "42 Civil engineering"
+      de: "42 Tiefbau"
+      fr: "42 Génie civil"
+      it: "42 Genio civile"
+    f43:
+      en: "43 Specialised construction activities"
+      de: "43 Vorbereitende Baustellenarbeiten, Bauinstallation und sonstiges Ausbaugewerbe"
+      fr: "43 Travaux de construction spécialisés"
+      it: "43 Lavori di costruzione specializzata"
+    ind:
+      en: "B-E Industry"
+      de: "B-E Industrie"
+      fr: "B-E Industrie"
+      it: "B-E Industria"
+    migcd:
+      en: "Consumer durables"
+      de: "Gebrauchsgüter"
+      fr: "Biens de consommation durables"
+      it: "Beni di consumo durevoli"
+    migcg:
+      en: "Capital goods"
+      de: "Investitionsgüter"
+      fr: "Biens d'investissement"
+      it: "Beni strumentali"
+    migcn:
+      en: "Consumer non-durables"
+      de: "Verbrauchsgüter"
+      fr: "Biens de consommation non durables"
+      it: "Beni di consumo non durevoli"
+    migen:
+      en: "Energy"
+      de: "Energie"
+      fr: "Energie"
+      it: "Energia"
+    migig:
+      en: "Intermediate goods"
+      de: "Vorleistungsgüter"
+      fr: "Biens intermédiaires"
+      it: "Prodotti intermedi"
+    sekt2:
+      en: "B-F Secondary sector"
+      de: "B-F Sekundärer Sektor"
+      fr: "B-F Secteur secondaire"
+      it: "B-F Settore secondario"
+  adjustment:
+    brut:
+      en: "Unadjusted"
+      de: "Unbereinigt"
+      fr: "Brut"
+      it: "Grezzo"
+    ca:
+      en: "Adjusted for calendar effects"
+      de: "Kalenderbereinigt"
+      fr: "Corrigé des effets calendaires"
+      it: "Corretto per gli effetti di calendario"
+    sa:
+      en: "Seasonally adjusted"
+      de: "Saisonbereinigt"
+      fr: "Désaisonnalisé"
+      it: "Destagionalizzato"
 
 
 # update checksum is empty in the beginning

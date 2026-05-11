@@ -5,9 +5,8 @@
 #'
 #' @importFrom opentimeseries write_open_ts is_update_needed update_checksum
 #' @export
-handle_update <- function() {
-
-  checksum_input <- generate_checksum_input()
+handle_update <- function(key = key) {
+  checksum_input <- generate_checksum_input(key = key)
 
   if (!is_update_needed(checksum_input)) {
     message("No update needed, series up-to-date.")
@@ -19,7 +18,7 @@ handle_update <- function() {
   # from its original provider
   # Store checksum after successful update
   upd <- update_checksum(checksum)
-  if(upd){
+  if (upd) {
     process_data("kofbarometer", ids = c("barometer"))
   } else {
     message("Checksum initialized. Data untouched.")
@@ -35,6 +34,11 @@ handle_update <- function() {
 #' official publisher sites or APIs or any single time series from a database,
 #' because opentsi definition all time series of the same dataset must
 #' have the same publication date.
-generate_checksum_input <- function(){
-
+generate_checksum_input <- function(key = key) {
+  # need to include user via session
+  set_config(api_key = key)
+  # hardcoded, maybe not so good
+  sample_key <- "ch.fso.bapau.ind.ptot.c26.brut"
+  ts <- read_ts(ts_keys = sample_key)
+  return(ts)
 }
