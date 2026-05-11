@@ -36,7 +36,7 @@ handle_update <- function(key = key) {
 #' have the same publication date.
 generate_checksum_input <- function(key = key) {
   # need to include user via session
-  set_config(api_key = key)
+  # set_config(api_key = key)
   # hardcoded, maybe not so good
   sample_key <- "ch.fso.bapau.ind.ptot.c26.brut"
   ts <- read_ts(ts_keys = sample_key)
