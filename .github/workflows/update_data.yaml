@@ -5,12 +5,14 @@ name: Update Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 10 1,5,15 * *"
-# triggers at 10:00 AM UTC on the 1st, 5th, and 15th of every month
+    - cron: "0 10 1,5,15 2,5,8,11 *"
+  # triggers at 10:00 on day 1, 5, and 15 in Feb, May, Aug, and Nov
+
 
 # needed only for transfer
 # permissions:
 #   contents: write  # grants the GITHUB_TOKEN write access to the repo (allows automatic updates to happen)
+
 
 jobs:
   setup:
@@ -39,6 +41,7 @@ jobs:
         run: |
           R -q -e 'install.packages("pak")'
           R -q -e 'pak::pkg_install("opentsi/opentimeseries")'
+          R -q -e 'pak::pkg_install("opentsi/tsdbapi-R")'
           R -q -e 'pak::pkg_install("${{ github.repository }}")'
 
       - name: handle_update
