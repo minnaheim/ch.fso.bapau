@@ -12,7 +12,6 @@ on:
 # permissions:
 #   contents: write  # grants the GITHUB_TOKEN write access to the repo (allows automatic updates to happen)
 
-
 jobs:
   setup:
     runs-on: ubuntu-latest
