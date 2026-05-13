@@ -49,7 +49,7 @@ jobs:
           R -q -e '${{ github.event.repository.name }}::handle_update()'
       - name: Commit and push changes (if any)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TSDBAPI: ${{ secrets.TSDBAPI }}
         run: |
           git add -A
           if git diff --cached --quiet; then
@@ -57,4 +57,4 @@ jobs:
             exit 0
           fi
           git commit -m "update data"
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          git push https://x-access-token:${TSDBAPI}@github.com/${{ github.repository }}.git
